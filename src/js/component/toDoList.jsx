@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 
 function ToDoList () {
-    const listTasksClassname = "list-group-item px-5";
     const [listTasks, setListTasks] = useState([]);
-    const [numberOfTasks, setNumberOfTasks] = useState(0);
     const [inputPlaceholder, setInputPlaceholder] = useState("No tasks, add a task");
+
     return(
         <div>
-            <div className="card">
+            <div className="card rounded-0">
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item px-5">
                         <input
@@ -15,7 +14,6 @@ function ToDoList () {
                             onKeyUp={(e) =>{
                             if (e.key === "Enter"){
                                 setListTasks(listTasks.concat({ label: e.target.value}));
-                                setNumberOfTasks(numberOfTasks+1);
                                 setInputPlaceholder("What needs to be done?");
                             }
                             }}
@@ -27,20 +25,26 @@ function ToDoList () {
                             <div className="w-100">
                                 {t.label}
                             </div>
-                            <span onClick={(e)=>{
-                                setNumberOfTasks(numberOfTasks-1);
-                                e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-                                if(numberOfTasks === 0){
+                            <span className="img-show-on-hover" onClick={(e)=>{
+                                console.log(listTasks.indexOf(t));
+                                let newListTasks = [];
+                                for (let item of listTasks){
+                                    if (item != t){
+                                        newListTasks.push(item);
+                                    }
+                                }
+                                setListTasks(newListTasks);
+                                if(listTasks.length == 1){
                                     setInputPlaceholder("No tasks, add a task");
                                 }
                             }}>&times;</span>
                         </li>))
                     }
-                    <li className="list-group-item list-item-counter"><small>{numberOfTasks} item left</small></li>
+                    <li className="list-group-item list-item-counter"><small>{listTasks.length} item left</small></li>
                 </ul>
             </div>
-            <div className="card list-bottom-deco-1 m-auto"></div>
-            <div className="card list-bottom-deco-2 m-auto"></div>
+            <div className="rounded-0 card list-bottom-deco-1 m-auto"></div>
+            <div className="rounded-0 card list-bottom-deco-2 m-auto"></div>
         </div>
     );
 }

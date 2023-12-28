@@ -8,11 +8,21 @@
 }
 
 .list-bottom-deco-1{
-    width: 98%;
-    height: 10px;
+    width: 99%;
+    height: 7px;
+    border-top: none;
 }
 
 .list-bottom-deco-2{
-    width: 96%;
-    height: 10px;
+    width: 98%;
+    height: 7px;
+    border-top: none;
+}
+
+.img-show-on-hover{
+    display: none;
+}
+
+.list-group-item:hover .img-show-on-hover{
+    display: block;
 }
